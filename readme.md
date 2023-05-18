@@ -140,4 +140,56 @@ db.movies.deleteMany( { title: "Titanic" } )
 db.movies.deleteOne( { cast: "Brad Pitt" } )
 ```
 
+## Limit the number of document
+
+`db.collection.find({}).limit(2)`
+
+## Skip the document return
+
+_useful when creating the pagination_
+`db.collection.find({}).skip(2)`
+
+## Sort the document
+
+_asending order_
+`db.collection.find().sort({field:1})`
+
+_decending order_
+`db.collection.find().sort({field:-1})`
+EX-
+`db.restaurants.find().sort( { "borough": 1, "_id": 1 } )
+`
+
+## Below is the link of query operators
+
+[query operators](https://www.mongodb.com/docs/manual/reference/operator/query/)
+
+Some of the operators are:
+
+- Comparison
+- Logical
+- Element
+- Evaluation
+
+## Aggregation Pipeline Stages
+
+```
+db.collection.aggregate( [ { <stage> }, ... ] )
+
+db.orders.aggregate( [
+
+   // Stage 1: Filter pizza order documents by pizza size
+   {
+      $match: { size: "medium" }
+   },
+
+   // Stage 2: Group remaining documents by pizza name and calculate total quantity
+   {
+      $group: { _id: "$name", totalQuantity: { $sum: "$quantity" } }
+   }
+
+] )
+
+```
+
 ## This repo will have the command to connect to the database using Mongoose and perform CURD
